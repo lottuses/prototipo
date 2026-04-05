@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protótipo - Upgrade de PC</title>
+    ~<link rel="stylesheet" href="prototipo.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="hero">
+            <h1>Upgrade de PC e SUGESTÕES</h1>
+        </header>
+
+        <div class="content-wrapper">
+
+            <section class="layout-grid">
+                <article class="card">
+                    <h2>Inventário Rápido</h2>
+                    <form id="pc-form" onsubmit="event.preventDefault(); gerarRelatorio();">
+
+                        <div class="form-grid">
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label for="foco">Perfil de Uso Principal</label>
+                                <select id="foco" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="jogos">Gaming</option>
+                                    <option value="criacao">Workstation</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mobo">Chipset / Socket (Placa-Mãe)</label>
+                                <select id="mobo" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="am4" data-tier="3">AMD B550 (Socket AM4)</option>
+                                    <option value="am5" data-tier="6">AMD X670 (Socket AM5)</option>
+                                    <option value="lga1700" data-tier="4">Intel B660 (Socket LGA 1700)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cpu">Processador (CPU)</label>
+                                <select id="cpu" required>
+                                    <option value="">Selecione...</option>
+                                    <optgroup label="AM4">
+                                        <option value="r5_5600g" data-socket="am4" data-tier="2" data-desc="APU custo-benefício. Tem vídeo integrado.">Ryzen 5 5600G</option>
+                                        <option value="r5_5600" data-socket="am4" data-tier="2" data-desc="O atual rei do custo-benefício AM4. Não decepciona com GPUs médias.">Ryzen 5 5600</option>
+                                        <option value="r7_5800x3d" data-socket="am4" data-tier="6" data-desc="Monstro do 3D V-Cache para AM4.">Ryzen 7 5800X3D</option>
+                                    </optgroup>
+                                    <optgroup label="AM5">
+                                        <option value="r5_7600" data-socket="am5" data-tier="4"
+                                            data-desc="A melhor porta de entrada para a plataforma AM5.">Ryzen 5 7600</option>
+                                        <option value="r9_7950x" data-socket="am5" data-tier="6" data-desc="16 núcleos de destruição multitarefa.">Ryzen 9 7950X</option>
+                                        <option value="r9_9950x3d" data-socket="am5" data-tier="6"
+                                            data-desc="O auge tecnológico. O melhor dos mundos em criação e gaming sem compromissos.">Ryzen 9 9950X3D</option>
+                                    </optgroup>
+                                    <optgroup label="Intel">
+                                        <option value="i3_12100f" data-socket="lga1700" data-tier="1" data-desc="Rei do custo-benefício ultra-budget.">Core i3 12100F</option>
+                                        <option value="i9_14900k" data-socket="lga1700" data-tier="6" data-desc="Pico absoluto da arquitetura Intel.">Core i9 14900K</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gpu">Placa de Vídeo (GPU)</label>
+                                <select id="gpu" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="igpu" data-tier="0" data-desc="Gráficos do processador. Não serve para jogos pesados.">Vídeo Integrado (Sem Placa Dedicada)</option>
+                                    <option value="gt_1030" data-tier="-2" data-desc="Joga fora.">GT 1030</option>
+                                    <option value="rtx_4060_ti" data-tier="3"
+                                            data-desc="Eficiente e fresca, mas foi criticada pelo preço alto e chip capado na geração.">RTX 4060 Ti</option>
+                                    <option value="rtx_4090" data-tier="6" data-desc="O peso-pesado imbatível. Roda tudo no máximo com folga.">RTX 4090</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ram">Memória RAM</label>
+                                <select id="ram" required>
+                                    <option value="8">8 GB (Single Channel)</option>
+                                    <option value="16" selected>16 GB (Dual Channel)</option>
+                                    <option value="32">32 GB (Dual Channel)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="storage">Armazenamento</label>
+                                <select id="storage" required>
+                                    <option value="nvme" selected>SSD NVMe M.2</option>
+                                    <option value="hdd">HDD Mecânico (Antigo)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="storage_cap">Capacidade</label>
+                                <select id="storage_cap" required>
+                                    <option value="256">256GB</option>
+                                    <option value="512" selected>512GB</option>
+                                    <option value="1000">1TB+</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label for="psu">Fonte (PSU)</label>
+                                <select id="psu" required>
+                                    <option value="generica">Fonte Genérica (Bomba)</option>
+                                    <option value="600">600W (80 Plus Bronze)</option>
+                                    <option value="1000">1000W+ (Entusiasta)</option>
+                                </select>
+                            </div>
+
+                            <button class="submit-btn" type="submit">Gerar Diagnóstico de Teste</button>
+                        </div>
+                    </form>
+                </article>
+
+                <article class="card">
+                    <h2>Relatório</h2>
+                    <div id="output">
+                        
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        
+        document.getElementById('gpu').addEventListener('change', function () {
+            const isIgpu = this.value === 'igpu';
+            const cpuSelect = document.getElementById('cpu');
+            const options = cpuSelect.querySelectorAll('option:not([value=""])');
+
+            options.forEach(option => {
+                const val = option.value.toLowerCase();
+                const isAmdApu = val.endsWith('g') || val.endsWith('gt');
+                const isIntelApu = (val.startsWith('i') || val.startsWith('g')) && !val.endsWith('f') && !val.endsWith('kf');
+
+                if (isIgpu) {
+                    if (isAmdApu || isIntelApu) {
+                        option.hidden = false;
+                        option.disabled = false;
+                    } else {
+                        option.hidden = true;
+                        option.disabled = true;
+                        if (option.selected) {
+                            cpuSelect.value = ''; 
+                        }
+                    }
+                } else {
+                    option.hidden = false;
+                    option.disabled = false;
+                }
+            });
+        });
+
+        function gerarRelatorio() {
+            const moboSelect = document.getElementById('mobo');
+            const moboOption = moboSelect.options[moboSelect.selectedIndex];
+            const cpuSelect = document.getElementById('cpu');
+            const cpuOption = cpuSelect.options[cpuSelect.selectedIndex];
+            const gpuSelect = document.getElementById('gpu');
+            const gpuOption = gpuSelect.options[gpuSelect.selectedIndex];
+            const ramSelect = document.getElementById('ram');
+            const ramOption = ramSelect.options[ramSelect.selectedIndex];
+
+            const foco = document.getElementById('foco').value;
+            const moboName = moboOption.text;
+            const moboSocket = moboSelect.value;
+            const moboTier = parseInt(moboOption.dataset.tier) || 0;
+            const cpuName = cpuOption.text;
+            const cpuSocket = cpuOption.dataset.socket;
+            const cpuTier = parseInt(cpuOption.dataset.tier);
+            const cpuDesc = cpuOption.dataset.desc;
+            const gpuName = gpuOption.text;
+            const gpuTier = parseInt(gpuOption.dataset.tier);
+            const gpuDesc = gpuOption.dataset.desc;
+            const ram = parseInt(ramOption.value);
+            const isSingleChannel = ramOption.text.includes('Single');
+            const storage = document.getElementById('storage').value;
+            const storageCap = parseInt(document.getElementById('storage_cap').value);
+            const psu = document.getElementById('psu').value;
+
+            let html = '';
+
+            function alertBox(type, title, text) {
+                html += `<div class="alert alert-${type}"><strong>${title}</strong> ${text}</div>`;
+            }
+
+            html += '<div class="report-section"><h3>🔍 Raio-X das Peças Selecionadas</h3>';
+            html += `<div class="x-ray-box"><strong>Placa-Mãe (${moboName})</strong> - Plataforma ${moboSocket.toUpperCase()}</div>`;
+            html += `<div class="x-ray-box"><strong>Processador (${cpuName}):</strong> ${cpuDesc}</div>`;
+            html += `<div class="x-ray-box"><strong>Placa de Vídeo (${gpuName}):</strong> ${gpuDesc}</div>`;
+            html += '</div>';
+
+            // Teste de Socket
+            if (moboSocket !== cpuSocket && cpuSocket) {
+                alertBox('critical', 'Incompatibilidade Física Grave', `Você selecionou uma placa-mãe do tipo <b>${moboName}</b>, mas o processador <b>${cpuName}</b> utiliza o socket <b>${cpuSocket.toUpperCase()}</b>. O processador não vai encaixar. Corrija a configuração.`);
+                document.getElementById('output').innerHTML = html;
+                return;
+            } else {
+                alertBox('good', 'Check de Hardware', `O <b>${cpuName}</b> é perfeitamente compatível com a plataforma selecionada.`);
+            }
+
+            // Teste de Fonte
+            html += '<div class="report-section"><h3>Alimentação de Energia (PSU)</h3>';
+            if (psu === 'generica') {
+                alertBox('critical', 'Risco de Perda Total', 'Fontes genéricas fornecem energia instável. <b>Sua primeira compra</b> deve ser uma fonte confiável.');
+            } else if (gpuTier >= 5 && (psu === '400' || psu === '600')) {
+                alertBox('warning', 'Alerta de Fonte (TDP Alto)', `A <b>${gpuName}</b> consome muita energia. Fontes fracas podem causar desligamentos súbitos.`);
+            } else {
+                alertBox('good', 'Energia Estável', 'A fonte informada tem capacidade segura para sustentar a configuração atual.');
+            }
+            html += '</div>';
+
+            // Teste de VRM
+            html += '<div class="report-section"><h3>Análise de Placa-Mãe e VRM</h3>';
+            if (moboTier && cpuTier) {
+                if (cpuTier - moboTier >= 2) {
+                    alertBox('critical', 'Gargalo de VRM (Placa-Mãe Fraca)', `A placa-mãe <b>${moboName}</b> é muito básica para a força do processador <b>${cpuName}</b>. Pode causar superaquecimento.`);
+                } else if (moboTier - cpuTier >= 3) {
+                    alertBox('info', 'Placa-Mãe Superdimensionada', `A <b>${moboName}</b> é de um segmento muito superior ao <b>${cpuName}</b>.`);
+                } else {
+                    alertBox('good', 'Equilíbrio de Plataforma', `A placa-mãe e o processador estão em patamares compatíveis.`);
+                }
+            }
+            html += '</div>';
+
+            // Teste de Gargalo CPU/GPU
+            html += '<div class="report-section"><h3>Análise de Gargalo de Performance</h3>';
+            let gargaloResolvido = false;
+            if (gpuTier - cpuTier >= 2) {
+                alertBox('warning', 'Gargalo de CPU (CPU Bound)', `A <b>${gpuName}</b> é muito forte para o <b>${cpuName}</b>. A placa de vídeo não consegue atingir 100% de uso.`);
+                gargaloResolvido = true;
+            } else if (cpuTier - gpuTier >= 2) {
+                if (gpuTier === 0) {
+                    alertBox('warning', 'Falta GPU Dedicada', `O <b>${cpuName}</b> está preso aos gráficos integrados.`);
+                } else {
+                    alertBox('warning', 'Gargalo de Placa de Vídeo (GPU Bound)', `O <b>${cpuName}</b> sobra nas tarefas pesadas, mas a <b>${gpuName}</b> está no limite (100% de uso).`);
+                }
+                gargaloResolvido = true;
+            }
+            if (!gargaloResolvido) {
+                alertBox('good', 'Sistema Balanceado', `A combinação de <b>${cpuName}</b> com a <b>${gpuName}</b> está bem equilibrada.`);
+            }
+            html += '</div>';
+
+            // Teste de RAM e Armazenamento
+            html += '<div class="report-section"><h3>Memória e Armazenamento</h3>';
+            if (ram === 8) alertBox('critical', 'Capacidade Crítica (8GB)', 'O PC vai travar e terá erros em uso pesado. Atualize para 16GB.');
+            else if (ram === 16 && isSingleChannel) alertBox('warning', 'Gargalo de Banda (Single Channel)', 'Limita o desempenho em 15%. Use dois pentes.');
+            else alertBox('good', 'Memória OK', 'Capacidade adequada.');
+            if (storage === 'hdd') alertBox('critical', 'Gargalo Extremo (HDD)', 'O Windows vai demorar minutos para iniciar, softwares irão rodar de forma extremamente lenta. Faça o upgrade para um SSD.');
+            else alertBox('good', 'Armazenamento Rápido', 'Sistema fluido e rápido .');
+            
+            html += '</div>';
+
+            document.getElementById('output').innerHTML = html;
+        }
+    </script>
+
+    <footer class="section-inicio fade-on-load">
+        <p>Desenvolvido por: Eduardo Calassio e Gabriel Hoaska Lima de Queiroz © 2026</p>
+    </footer>
+</body>
+
+</html>
